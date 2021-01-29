@@ -1,12 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Reserve;
+use App\Models\Reservation;
 
 use Illuminate\Http\Request;
 
-class ReserveController extends Controller
+class ReservationController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,8 @@ class ReserveController extends Controller
      */
     public function index()
     {
-        //
+        $reservation = Reservation::all();
+        return view('reservations.index', compact('reservation'));
     }
 
     /**
@@ -24,7 +36,7 @@ class ReserveController extends Controller
      */
     public function create()
     {
-        //
+        return view('reservations.create');
     }
 
     /**
@@ -40,7 +52,7 @@ class ReserveController extends Controller
         ]);
         $reserva = Reserve::create($storeData);
 
-        return redirect('/cars')->with('completed', 'Reserva Realizada com sucesso');
+        return redirect('/reservations')->with('completed', 'Reserva Realizada com sucesso');
     }
 
     /**
@@ -62,7 +74,8 @@ class ReserveController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reservation = Reservation::findOrFail($id);
+        return view('reservations.edit', compact('reservation'));
     }
 
     /**
@@ -74,7 +87,13 @@ class ReserveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateData = $request->validate([
+            'data_reserva' => 'required|max:255',
+            'user_id' => 'required|numeric',
+            'car_id' => 'required|numeric',
+        ]);
+        Reservation::whereId($id)->update($updateData);
+        return redirect('/reservations')->with('completed', 'Reserva Atualizado com sucesso!');
     }
 
     /**

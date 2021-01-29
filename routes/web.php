@@ -23,4 +23,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('cars', CarController::class);
 Route::resource('users', UserController::class);
+Route::resource('reservations', ReservationController::class);
 
