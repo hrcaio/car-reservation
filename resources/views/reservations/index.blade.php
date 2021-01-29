@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <a href="{{ route('reservations.create') }}" class="btn btn-info" role="button">Fazer Reserva</a>
             <div class="card">
                 <div class="card-header">Lista de Reservas</div>
                 <div class="card-body">

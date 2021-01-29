@@ -6,11 +6,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <a href="{{ route('cars.create') }}" class="btn btn-info" role="button">Adicionar Carro</a>
             <div class="card">
                 <div class="card-header">Lista de Carros</div>
-
                 <div class="card-body">
-
                     <div class="push-top">
                     @if(session()->get('success'))
                         <div class="alert alert-success">
