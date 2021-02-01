@@ -47,10 +47,17 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+       
+        
         $storeData = $request->validate([
             'data_reserva' => 'required',
+            'user_id' => 'required',
+            'car_id' => 'required'
         ]);
-        $reserva = Reserve::create($storeData);
+
+        //dd($storeData);
+
+        $reserva = Reservation::create($storeData);
 
         return redirect('/reservations')->with('completed', 'Reserva Realizada com sucesso');
     }
